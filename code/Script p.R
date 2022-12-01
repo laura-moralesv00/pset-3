@@ -51,17 +51,15 @@ parques <- opq(bbox = getbb("Cali Colombia")) %>% # descargar datos de parques e
   add_osm_feature(key = "leisure", value = "park") %>%
   osmdata_sf() %>% .$osm_polygons %>% select(osm_id,name)
 
-restaurantes <- opq(bbox = getbb("Cali Colombia")) %>% # descargar datos de restaurantes en Cali.
-  add_osm_feature(key = "leisure", value = "restaurant") %>%
-  osmdata_sf() %>% .$osm_points %>% select(osm_id,name)
-
+restaurantes <- opq ("Cali Colombia") %>%
+  add_osm_feature (key = "amenity", value = "restaurant"  ) # descargar datos de restaurantes en Cali.
 
 
 
 ## 2.2 Visualizaciones
 leaflet() %>% addTiles() %>% addPolygons(data=parques) # visualizar parques
 
-leaflet() %>% addTiles() %>% addCircleMarkers(data=restaurant , col="red") # visualizar restaurantes
+leaflet(restaurantes) %>% addTiles() %>% addCircleMarkers(data=restaurantes, col(red))
 
 
 ## 2.3
